@@ -88,8 +88,14 @@
     cursor: pointer;
     border: 0px;
     background-color: #D4A373;
-    color: #0f0e0e;
+    color: #FEFAE0;
     padding: 0.4em 0.6em;
+    font-size: small;
+  }
+
+  .btn:hover {
+    background-color: #CCD5AE;
+    color: rgb(51, 51, 51);
   }
 
   /* Top bar styles */
@@ -158,7 +164,7 @@
     border-radius: 12px;
     position: relative;
     height: fit-content;
-    box-shadow:  0 8px 8px -6px #cfc694;
+    box-shadow:  0 10px 10px -4px #CCD5AE;
   }
 
   .book > img {
