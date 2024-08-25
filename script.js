@@ -1,36 +1,5 @@
-
-       // Object Constructors
-        
-        // function Book(title, author, pages, read) {
-        //     this.title = title;
-        //     this.author = author;
-        //     this.pages = pages;
-        //     this.read = read;
-        //     this.info = function(){
-        //         return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`;
-        //     }
-        // }
-
-        // const book1 = new Book('Atomic habits', 'James Clear', '323 pages', 'not read yet');
-
-        //     console.log(book1.title);
-        //     console.log(book1.author);
-        //     console.log(book1.pages);
-        //     console.log(book1.read);
-        //     console.log(book1.info());
-
-        // const book2 = new Book('Javascript for Dummies', 'Angel cooper', '456 pages', 'completed');
-        //     console.log(book2.title);
-        //     console.log(book2.author);
-        //     console.log(book2.pages);
-        //     console.log(book2.read);
-        //     console.log(book2.info());
-
-
-
         var form = document.querySelector('.card');
         var bookList = document.querySelector('.main-section') ;
-        
         
 
         // form add book item
@@ -48,44 +17,86 @@
           // create new book element
           var newBook = document.createElement('div');
           // add class
-          newBook.className = 'book';
-
+          newBook.classList = 'book';
           bookList.appendChild(newBook);
-
-         // create nbook display elements
-         //img
-         var removeIcon = document.createElement('img');
-         removeIcon.src = "assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg";
-         removeIcon.title = "Remove";
-         newBook.appendChild(removeIcon);
-
-         var bookDetails = document.createElement('div');
-         bookDetails.className = "book-details";
-
-         newBook.appendChild(bookDetails);
 
          // display title
          var displayTitle = document.createElement('h3');
          displayTitle.textContent = newTitle;
-         bookDetails.appendChild(displayTitle);
+         newBook.appendChild(displayTitle);
 
          // display author
          var displayAuthor = document.createElement('p');
          displayAuthor.textContent = `Author: ${newAuthor}`;
-         bookDetails.appendChild(displayAuthor);
+         newBook.appendChild(displayAuthor);
 
          // display page number
          var displayPage = document.createElement('p');
          displayPage.textContent = `Pages: ${newPages}`;
-         bookDetails.appendChild(displayPage);
+         newBook.appendChild(displayPage);
 
          // add button
          var displayBtn = document.createElement('button');
+         displayBtn.className = "toggle";
          displayBtn.textContent = newStatus;
-         bookDetails.appendChild(displayBtn);
+         if(displayBtn.textContent == 'Read') displayBtn.style.backgroundColor = '#CCD5AE';
+         newBook.appendChild(displayBtn);
 
-       //   div.appendChild(document.createElement(im))
+          // create book display elements
+         //img
+         var removeIcon = document.createElement('img');
+         removeIcon.src = "assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg";
+         removeIcon.title = "Remove";
+         removeIcon.className = 'remove'
+         newBook.appendChild(removeIcon);
 
-       //   var book = document.querySelector('.book');
+         form.reset();
 
-        }
+       }
+
+       // removing book from display
+
+       bookList.addEventListener('click', removeBook);
+
+       function removeBook(e) {
+         if(e.target.classList.contains('remove')){
+         var div = e.target.parentElement;
+         bookList.removeChild(div);
+         }
+       }
+
+       // toggle read and unread
+
+       bookList.addEventListener('click', toggleStatus);
+
+       function toggleStatus(e) {
+              if(e.target.classList.contains('toggle')){
+              if(e.target.textContent == 'Unread' ){
+                     e.target.textContent= 'Read';
+                     e.target.style.backgroundColor = '#CCD5AE';
+              } else {
+                     e.target.textContent= 'Unread';
+                     e.target.style.backgroundColor = '#FAEDCD';
+              }
+       }
+       }
+
+       // search book from search bar
+
+       var search = document.getElementById('search');
+       search.addEventListener('keyup', searchBook);
+
+       function searchBook(e){
+              let text = e.target.value.toLowerCase();
+              // get books
+              let books = bookList.getElementsByClassName('book');
+             // convert into array
+              Array.from(books).forEach(function(book){
+                var bookName = book.firstElementChild.textContent;
+                if(bookName.toLowerCase().indexOf(text) < 0 ){
+                     book.style.display = 'none'
+                } else {
+                     book.style.display = 'inherit'
+                }
+              })
+       }

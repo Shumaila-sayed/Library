@@ -15,103 +15,66 @@
             
                 <form class="card">
                     <div class="form-field">
-                    <label for="title">Title</label> 
-                    <input id="title" type="text"/>
-                   </div>
+                        <label for="title">Title</label> 
+                        <input id="title" type="text" required/>
+                    </div>
                    <div class="form-field">
-                    <label for="author">Author</label> 
-                    <input id="author" type="text"/>
-                   </div>
+                        <label for="author">Author</label> 
+                        <input id="author" type="text" required/>
+                    </div>
                    <div class="form-field">
-                    <label for="pages">Pages</label> 
-                    <input id="pages" type="number"/>
-                   </div>
+                        <label for="pages">Pages</label> 
+                        <input id="pages" type="number" required/>
+                    </div>
                    <div class="form-field radio">
-                    <input type="radio" id="read" name="status" value="read">
+                        <input type="radio" id="read" name="status" value="Read">
                         <label for="read">Read</label>
-                        <input type="radio" id="unread" name="status" value="unread" checked>
+                        <input type="radio" id="unread" name="status" value="Unread" checked>
                         <label for="unread">Unread</label>
                    </div>
-
                    <button type="submit" class="form-field btn">ADD BOOK</button>
-                   
                 </form>
             
         </section>
+
         <section class="Topbar">
             <div class="search">
             <img class="search-icon" src="assets/icons/search_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="icon">
-            <input type="search" id="search">
+            <input type="search" id="search" placeholder="Search book..">
             </div>
             <div class="user">
                 <img class="avatar" src="assets/icons/profile2.png" alt="Profile pic">
-                <p class="userName">User Name</p>
+                <p class="userName"><a href="https://github.com/Shumaila-sayed" target="_blank">Made by Shumaila Sayed</a></p>
             </div>
         </section>
+
         <section class="main-section">
 
-            <div class="book">
-                <img src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">
-                <div class="book-details">
-                    <h3>Atomic Habits</h3>
+             <div class="book">
+                  <h3>Atomic Habits</h3>
                     <p>Author: James Clear</p>
                     <p>Pages: 520</p>
-                    <button>Unread</button>
-                </div>
+                    <button class="toggle" >Unread</button>
+                <img class="remove" src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">                
             </div> 
 
              <div class="book">
-                <img src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">
-                <div class="book-details">
-                    <h3>Inferno</h3>
+                   <h3>Inferno</h3>
                     <p>Author: Dan Brown</p>
                     <p>Pages: 450</p>
-                    <button>Unread</button>
-               </div>
+                    <button class="toggle" >Unread</button>
+                <img class="remove" src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">
             </div>
 
             <div class="book">
-                <img src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">
-                <div class="book-details">
-                    <h3>Spooky Sister</h3>
-                    <p>Author: Sandra Cooper</p>
-                    <p>Pages: 80</p>
-                    <button>Unread</button>
-                </div>
-            </div>  
+                <h3>The Alchemist</h3>
+                <p>Author: Paulo Coelho</p>
+                <p>Pages: 182</p>
+                <button class="toggle" >Unread</button>
+                <img class="remove" src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">    
+            </div>              
+        </section>  
 
-            <!-- <div class="book">
-                <img src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">
-                <div class="book-details">
-                    <h3>Rework</h1>
-                    <p>Author: Amanda Smith</p>
-                    <p>Pages: 210</p>
-                    <button>Unread</button>
-                </div>
-            </div>
-
-            <div class="book">
-                <img src="assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg" alt="close" title="Remove">
-                <div class="book-details">
-                    <h3>Sapeins</h1>
-                    <p>Author: Yuval Nara</p>
-                    <p>Pages: 500</p>
-                    <button>Unread</button>
-                </div>
-            </div> -->
-
-            
-        </section>
     </div> 
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
