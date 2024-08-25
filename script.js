@@ -2,7 +2,7 @@
         var bookList = document.querySelector('.main-section') ;
         
 
-        // form add book item
+          // form add book item
         form.addEventListener('submit', addBook);
 
         function addBook(e){

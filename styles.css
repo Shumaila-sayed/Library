@@ -58,7 +58,7 @@
    
   }
 
-   /* styling book section  */
+  /* styling book section  */
 
  .card {
     background-color: #FAEDCD;
@@ -153,6 +153,11 @@
     height: 36px;
   }
 
+  a{
+    text-decoration: none;
+    color: #da9d60;
+  }
+
   /* Main book section */
 
   .main-section {
@@ -199,10 +204,3 @@
     border-bottom: 1px solid #FAEDCD;
     padding-bottom: 20px;
   }
-
- 
-
-a{
-    text-decoration: none;
-    color: #da9d60;
-}
