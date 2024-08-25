@@ -3,7 +3,9 @@
 A website to keep a track on the books you've read!
 
 ## Screenshots
+![Alt text](image link)
 
+![]("assets/")
 
 ### Functionalities
 
