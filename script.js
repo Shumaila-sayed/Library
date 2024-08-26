@@ -71,7 +71,7 @@ function displayBook() {
               bookDiv.appendChild(newAuthor);
 
               const newPages = document.createElement('p');
-              newPages.textContent = `Pages: ${book.pages};`
+              newPages.textContent = `Pages: ${book.pages}`;
               bookDiv.appendChild(newPages);
 
               const newStatus = document.createElement('button');
