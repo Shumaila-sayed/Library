@@ -1,102 +1,114 @@
-        var form = document.querySelector('.card');
-        var bookList = document.querySelector('.main-section') ;
-        
+"use strict"
 
-          // form add book item
-        form.addEventListener('submit', addBook);
-
-        function addBook(e){
-              e.preventDefault();
-         
-          // get new book values
-         var newTitle = document.getElementById('title').value;
-         var newAuthor = document.getElementById('author').value;
-         var newPages = document.getElementById('pages').value;
-         var newStatus = document.querySelector('input[name="status"]:checked').value;
+function Book(title, author, pages, status) {
+  // the constructor...
+  this.title = title,
+  this.author = author,
+  this.pages = pages,
+  this.status = status,
+  this.toggleRead = function () {
+       this.status = !this.status;
        
-          // create new book element
-          var newBook = document.createElement('div');
-          // add class
-          newBook.classList = 'book';
-          bookList.appendChild(newBook);
+   }
+   this.deleteBook = function () {
+       // myLibrary is an array that has all books
+       myLibrary.splice(myLibrary.indexOf(this), 1);
+   }
+}
 
-         // display title
-         var displayTitle = document.createElement('h3');
-         displayTitle.textContent = newTitle;
-         newBook.appendChild(displayTitle);
+const myLibrary = [];
+const form = document.querySelector('.card');
+var bookList = document.querySelector('.main-section');
 
-         // display author
-         var displayAuthor = document.createElement('p');
-         displayAuthor.textContent = `Author: ${newAuthor}`;
-         newBook.appendChild(displayAuthor);
+form.addEventListener('submit', (e)=> {
+       e.preventDefault();
+    const bookTitle = document.getElementById('title').value
+    const bookAuthor = document.getElementById('author').value
+    const bookPages = document.getElementById('pages').value
+    const bookRead = document.getElementById('read').checked
+    // function to add book to library array
+    addBookToLibrary(bookTitle, bookAuthor, bookPages, bookRead);
+    // function to display books on screen
+    displayBook();
+    form.reset();
+} )
 
-         // display page number
-         var displayPage = document.createElement('p');
-         displayPage.textContent = `Pages: ${newPages}`;
-         newBook.appendChild(displayPage);
 
-         // add button
-         var displayBtn = document.createElement('button');
-         displayBtn.className = "toggle";
-         displayBtn.textContent = newStatus;
-         if(displayBtn.textContent == 'Read') displayBtn.style.backgroundColor = '#CCD5AE';
-         newBook.appendChild(displayBtn);
-
-          // create book display elements
-         //img
-         var removeIcon = document.createElement('img');
-         removeIcon.src = "assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg";
-         removeIcon.title = "Remove";
-         removeIcon.className = 'remove'
-         newBook.appendChild(removeIcon);
-
-         form.reset();
-
+bookList.addEventListener('click', (e) => {
+       if (e.target.classList.contains('toggle')) {
+           const book = myLibrary[Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode)];
+           book.toggleRead();
+           displayBook();
        }
-
-       // removing book from display
-
-       bookList.addEventListener('click', removeBook);
-
-       function removeBook(e) {
-         if(e.target.classList.contains('remove')){
-         var div = e.target.parentElement;
-         bookList.removeChild(div);
-         }
+       if (e.target.classList.contains('remove')) {
+           const book = myLibrary[Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode)];
+           book.deleteBook();
+           displayBook();
        }
+   });
 
-       // toggle read and unread
 
-       bookList.addEventListener('click', toggleStatus);
+function addBookToLibrary(title, author, pages, status) {
+  // do stuff here
+  const newBook = new Book(title, author, pages, status)
+  myLibrary.push(newBook) ;
+}
 
-       function toggleStatus(e) {
-              if(e.target.classList.contains('toggle')){
-              if(e.target.textContent == 'Unread' ){
-                     e.target.textContent= 'Read';
-                     e.target.style.backgroundColor = '#CCD5AE';
+
+function displayBook() {
+       myLibrary.length == 0 ? bookList.innerHTML = '<h4>Let`s keep a track of all the books you have read or are planning to read!</h4>' : bookList.innerHTML = '';
+       myLibrary.forEach(book => {
+              const bookDiv = document.createElement('div');
+              bookDiv.className = 'book';
+              
+
+              const newTitle = document.createElement('h3');
+              newTitle.textContent = book.title;
+              bookDiv.appendChild(newTitle);
+
+              const newAuthor = document.createElement('p');
+              newAuthor.textContent = `Author: ${book.author}`;
+              bookDiv.appendChild(newAuthor);
+
+              const newPages = document.createElement('p');
+              newPages.textContent = `Pages: ${book.pages};`
+              bookDiv.appendChild(newPages);
+
+              const newStatus = document.createElement('button');
+              newStatus.className = "toggle"
+              newStatus.textContent = `${book.status ? 'Read' : 'Unread'}`;
+              bookDiv.appendChild(newStatus);
+
+              const remove = document.createElement('img');
+              remove.className = "remove";
+              remove.src = "assets/icons/close_24dp_121212_FILL1_wght400_GRAD0_opsz24.svg";
+              remove.title = "remove";
+              bookDiv.appendChild(remove);
+
+         bookList.appendChild(bookDiv);
+       })
+}
+
+displayBook();
+
+
+// function to search
+
+var search = document.getElementById('search');
+
+search.addEventListener('keyup', e => {
+       let text = e.target.value.toLowerCase();
+       
+       let books = bookList.getElementsByClassName('book');
+         // convert into array
+         Array.from(books).forEach(function(book){
+              var bookName = book.firstElementChild.textContent;
+              if(bookName.toLowerCase().indexOf(text) < 0 ){
+                   book.style.display = 'none'
+                   bookList.textContent = "No results found" 
               } else {
-                     e.target.textContent= 'Unread';
-                     e.target.style.backgroundColor = '#FAEDCD';
+                   book.style.display = 'inherit'
               }
-       }
-       }
-
-       // search book from search bar
-
-       var search = document.getElementById('search');
-       search.addEventListener('keyup', searchBook);
-
-       function searchBook(e){
-              let text = e.target.value.toLowerCase();
-              // get books
-              let books = bookList.getElementsByClassName('book');
-             // convert into array
-              Array.from(books).forEach(function(book){
-                var bookName = book.firstElementChild.textContent;
-                if(bookName.toLowerCase().indexOf(text) < 0 ){
-                     book.style.display = 'none'
-                } else {
-                     book.style.display = 'inherit'
-                }
-              })
-       }
+            })
+             
+})

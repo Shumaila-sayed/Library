@@ -62,7 +62,7 @@
 
  .card {
     background-color: #FAEDCD;
-    padding: 1em 1.4em;
+    padding: 1em 1.8em;
 
     border-radius: 0.5em;
     font-size: medium;
@@ -203,4 +203,11 @@
   .book p:nth-child(3){
     border-bottom: 1px solid #FAEDCD;
     padding-bottom: 20px;
+  }
+
+  h4 {
+    text-align: center;
+    font-weight: lighter;
+    font-size: larger;
+    padding: 2em;
   }
