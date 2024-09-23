@@ -1,19 +1,20 @@
 "use strict"
 
-function Book(title, author, pages, status) {
-  // the constructor...
-  this.title = title,
-  this.author = author,
-  this.pages = pages,
-  this.status = status,
-  this.toggleRead = function () {
-       this.status = !this.status;
-       
-   }
-   this.deleteBook = function () {
-       // myLibrary is an array that has all books
-       myLibrary.splice(myLibrary.indexOf(this), 1);
-   }
+class Book {
+  constructor(title, author, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
+  }
+
+  toggleRead() {
+    this.status = !this.status;
+  }
+
+  deleteBook() {
+    myLibrary.splice(myLibrary.indexOf(this), 1);
+  }
 }
 
 const myLibrary = [];
@@ -49,7 +50,6 @@ bookList.addEventListener('click', (e) => {
 
 
 function addBookToLibrary(title, author, pages, status) {
-  // do stuff here
   const newBook = new Book(title, author, pages, status)
   myLibrary.push(newBook) ;
 }
@@ -94,21 +94,32 @@ displayBook();
 
 // function to search
 
-var search = document.getElementById('search');
+ var search = document.getElementById('search');
 
-search.addEventListener('keyup', e => {
-       let text = e.target.value.toLowerCase();
-       
-       let books = bookList.getElementsByClassName('book');
-         // convert into array
-         Array.from(books).forEach(function(book){
-              var bookName = book.firstElementChild.textContent;
-              if(bookName.toLowerCase().indexOf(text) < 0 ){
-                   book.style.display = 'none'
-                   bookList.textContent = "No results found" 
-              } else {
-                   book.style.display = 'inherit'
-              }
-            })
-             
-})
+  search.addEventListener('keyup', e => {
+      let text = e.target.value.toLowerCase();
+      let books = bookList.getElementsByClassName('book');
+      let hasResults = false;
+
+      Array.from(books).forEach(function(book) {
+          var bookName = book.firstElementChild.textContent;
+
+          if (bookName.toLowerCase().indexOf(text) < 0) {
+              book.style.display = 'none';
+          } else {
+              book.style.display = 'inherit';
+              hasResults = true; // Found at least one matching book
+          }
+      });
+
+      // If no books match the search, display a message
+      if (!hasResults) {
+          bookList.textContent = "No results found";
+      } else {
+          // Clear the message if there are results
+          if (bookList.textContent === "No results found") {
+              bookList.textContent = ''; // Clear previous message
+              displayBook(); // Redisplay all books
+          }
+      }
+    });
